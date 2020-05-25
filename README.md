@@ -1,10 +1,10 @@
 # GenerateJSModelFromEntitySQL
 Generate SQL Data Model from Entity Model & SQL
 
-From
+#### From
 
 ## SQL Structure
-###[Widgets]
+### Widgets Table
 ```sql
 	[WidgetID] [int] IDENTITY(1,1) NOT NULL,
 	[WidgetContent] [varchar](max) NULL,
@@ -19,7 +19,7 @@ From
 	[fk_UserID] [int] NULL
 ```
 
-To
+#### To
 
 ## Entity Object Class
 ```csharp
@@ -39,7 +39,7 @@ To
     }
 ```
 
-Then
+#### Then
 
 ## JavaScript Class
 ```javascript
