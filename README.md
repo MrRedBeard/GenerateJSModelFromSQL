@@ -1,5 +1,7 @@
 # GenerateJSModelFromEntitySQL
-A simple console app that generates JavaScript Classes & Model Documentation that mirrors a Database Entity Model & SQL Database Structure
+A simple console app that generates JavaScript Classes & Model Documentation that mirrors a Database Entity Model & SQL Database Structure.
+
+I created this to simplify documentation writing and to keep js models in sync with the DB Model with less human error/laziness. 
 
 #### From
 
@@ -110,8 +112,12 @@ Widget|fk_UserID|int|
 
 ## Instructions
 I included a sample database `SampleDB.sql`
+
 Once Database is created create user `user` with password `user`
+
 The app is preconfigured with a username of user and password user and connection path of localhost\SQLEXPRESS
+
 The model name is set to `GenerateJSModelFromEntitySQL` this will need to be changed to match your model name if you choose to use this solution.
+
 Run the solution to generate `DataModelInfo.txt` & `clsDataStructure.js`. These will be output in the same folder as the solution file. 
 
