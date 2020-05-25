@@ -61,3 +61,6 @@ A simple console app that generates JavaScript Classes & Model Documentation tha
     }
   }
 ```
+
+## Instructions
+I included a sample database `SampleDB.sql` and the app is preconfigured with a username of user and password user
