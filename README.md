@@ -1,5 +1,5 @@
 # GenerateJSModelFromEntitySQL
-Generate SQL Data Model from Entity Model & SQL
+A simple console app that generates JavaScript Classes & Model Documentation that mirrors a Database Entity Model & SQL Database Structure
 
 #### From
 
