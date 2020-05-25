@@ -1,0 +1,32 @@
+/**
+* Do Not Edit
+* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* Do Not Edit
+*/
+TableName|ColumnName|DataType|ColumnDescription
+User|UserID|int|
+User|FirstName|string|
+User|LastName|string|
+User|Email|string|
+User|CreatedDateTime|datetime|
+User|LastUpdatedDateTime|datetime|
+User|CreatedBy|int|
+User|LastUpdatedBy|int|
+Widget|WidgetID|int|
+Widget|WidgetContent|string|
+Widget|Color|string|
+Widget|Width|double|
+Widget|Height|double|
+Widget|Volume|double|
+Widget|CreatedDateTime|datetime|
+Widget|LastUpdatedDateTime|datetime|
+Widget|CreatedBy|int|
+Widget|LastUpdatedBy|int|
+Widget|fk_UserID|int|
+/**
+* Do Not Edit
+* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* Do Not Edit
+*/
