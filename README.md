@@ -62,5 +62,47 @@ A simple console app that generates JavaScript Classes & Model Documentation tha
   }
 ```
 
+#### And
+
+```
+/**
+* Do Not Edit
+* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* Do Not Edit
+*/
+TableName|ColumnName|DataType|ColumnDescription
+User|UserID|int|
+User|FirstName|string|
+User|LastName|string|
+User|Email|string|
+User|CreatedDateTime|datetime|
+User|LastUpdatedDateTime|datetime|
+User|CreatedBy|int|
+User|LastUpdatedBy|int|
+Widget|WidgetID|int|
+Widget|WidgetContent|string|
+Widget|Color|string|
+Widget|Width|double|
+Widget|Height|double|
+Widget|Volume|double|
+Widget|CreatedDateTime|datetime|
+Widget|LastUpdatedDateTime|datetime|
+Widget|CreatedBy|int|
+Widget|LastUpdatedBy|int|
+Widget|fk_UserID|int|
+/**
+* Do Not Edit
+* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* Do Not Edit
+*/
+```
+
 ## Instructions
-I included a sample database `SampleDB.sql` and the app is preconfigured with a username of user and password user
+I included a sample database `SampleDB.sql`
+Once Database is created create user `user` with password `user`
+The app is preconfigured with a username of user and password user and connection path of localhost\SQLEXPRESS
+The model name is set to `GenerateJSModelFromEntitySQL` this will need to be changed to match your model name if you choose to use this solution.
+Run the solution to generate `DataModelInfo.txt` & `clsDataStructure.js`. These will be output in the same folder as the solution file. 
+
