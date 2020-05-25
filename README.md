@@ -42,6 +42,14 @@ A simple console app that generates JavaScript Classes & Model Documentation tha
 #### Then
 
 ## JavaScript Class
+```
+/**
+* Do Not Edit
+* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* Do Not Edit
+*/
+```
 ```javascript
   class clsWidget
   {
@@ -64,6 +72,7 @@ A simple console app that generates JavaScript Classes & Model Documentation tha
 
 #### And
 
+## DB Model Documentation
 ```
 /**
 * Do Not Edit
