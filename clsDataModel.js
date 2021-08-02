@@ -1,10 +1,11 @@
 /**
 * Do Not Edit
-* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* Generate JS Model From Entity SQL Last Updated: 8/1/2021 10:09:22 PM
 * This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* https://github.com/MrRedBeard/GenerateJSModelFromEntitySQL
 * Do Not Edit
 */
-class clsUser
+class clsUsers
 {
 	constructor()
 	{
@@ -18,7 +19,7 @@ class clsUser
 		this.LastUpdatedBy = null;
 	}
 }
-class clsWidget
+class clsWidgets
 {
 	constructor()
 	{
@@ -37,7 +38,8 @@ class clsWidget
 }
 /**
 * Do Not Edit
-* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* Generate JS Model From Entity SQL Last Updated: 8/1/2021 10:09:22 PM
 * This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* https://github.com/MrRedBeard/GenerateJSModelFromEntitySQL
 * Do Not Edit
 */

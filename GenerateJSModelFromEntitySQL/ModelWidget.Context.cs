@@ -25,7 +25,7 @@ namespace GenerateJSModelFromEntitySQL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Widget> Widgets { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Widgets> Widgets { get; set; }
     }
 }

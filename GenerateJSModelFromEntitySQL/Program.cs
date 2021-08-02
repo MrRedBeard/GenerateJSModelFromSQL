@@ -11,6 +11,7 @@ using System.Reflection;
 using GenerateJSModelFromEntitySQLFunctions;
 using GenerateJSModelFromEntitySQL;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
 
 namespace GenerateJSModelFromEntitySQL
 {
@@ -79,7 +80,7 @@ namespace GenerateJSModelFromEntitySQLFunctions
                     ColumnStructure columnStructure = new ColumnStructure();
                     columnStructure.ColumnName = column.Name;
                     columnStructure.ColumnType = column.PropertyType.ToString().Replace("System.Nullable`1", "").Replace("{", "").Replace("}", "").Replace("[", "").Replace("]", "").Replace("16", "").Replace("32", "").Split('.')[1].ToLower();
-                    columnStructure.ColumnDescription = GetColumnDescription(tableStruct.TableName, columnStructure.ColumnName);
+                    //columnStructure.ColumnDescription = GetColumnDescription(tableStruct.TableName, columnStructure.ColumnName);
 
                     tableStruct.Columns.Add(columnStructure);
                 }
@@ -139,19 +140,32 @@ namespace GenerateJSModelFromEntitySQLFunctions
 * Do Not Edit
 * Generate JS Model From Entity SQL {LastUpdated}
 * This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* https://github.com/MrRedBeard/GenerateJSModelFromEntitySQL
 * Do Not Edit
 */" + Environment.NewLine;
 
-            string DataModelString = WarningMsg;
+            string DataModelString = "";
             DataModelString += "TableName|ColumnName|DataType|ColumnDescription" + Environment.NewLine;
             string jsDataStructure = WarningMsg;
 
+            string Tables = Environment.NewLine + "--Start of Tables--" + Environment.NewLine + Environment.NewLine;
+
+            //Image Building Data
+            List<TableImage> tableImages = new List<TableImage>();
+
             foreach (TableStructure table in dbStruct)
             {
-                if (table.TableName == "sysdiagram")
+                if (table.TableName == "sysdiagram" || table.TableName == "sysdiagrams")
                 {
                     continue;
                 }
+
+                //Image Building Data
+                TableImage tableImage = new TableImage();
+                tableImage.Columns = new List<ColumnImage>();
+                tableImage.TableName = table.TableName;
+
+                Tables += table.TableName + Environment.NewLine;
 
                 jsDataStructure += "class cls" + table.TableName + Environment.NewLine;
                 jsDataStructure += "{" + Environment.NewLine + "\t" + "constructor()" + Environment.NewLine + "\t" + "{" + Environment.NewLine;
@@ -159,6 +173,11 @@ namespace GenerateJSModelFromEntitySQLFunctions
                 foreach (ColumnStructure column in table.Columns)
                 {
                     DataModelString += table.TableName + "|" + column.ColumnName + "|" + column.ColumnType + "|" + column.ColumnDescription + Environment.NewLine;
+
+                    //Image Building Data
+                    ColumnImage columnImage = new ColumnImage();
+                    columnImage.ColumnName = column.ColumnName + " (" + column.ColumnType + ")";
+                    tableImage.Columns.Add(columnImage);
 
                     jsDataStructure += "\t\tthis." + column.ColumnName;
                     if (column.ColumnType == "boolean")
@@ -210,7 +229,14 @@ namespace GenerateJSModelFromEntitySQLFunctions
 
                 jsDataStructure += "\t}" + Environment.NewLine;
                 jsDataStructure += "}" + Environment.NewLine;
+
+                //Image Building Data
+                tableImages.Add(tableImage);
             }
+
+            Tables += Environment.NewLine + "--End of Tables--" + Environment.NewLine + Environment.NewLine;
+
+            DataModelString = WarningMsg + Tables + DataModelString;
 
             DataModelString += WarningMsg;
 
@@ -218,7 +244,161 @@ namespace GenerateJSModelFromEntitySQLFunctions
 
             System.IO.File.WriteAllText(DataModelGenSolutionPath + "DataModelInfo" + ".txt", DataModelString);
 
-            System.IO.File.WriteAllText(DataModelGenSolutionPath + "clsDataStructure" + ".js", jsDataStructure);
+            System.IO.File.WriteAllText(DataModelGenSolutionPath + "clsDataModel" + ".js", jsDataStructure);
+
+            //Image Building Data
+            CreateTableImages(tableImages, DataModelGenSolutionPath);
         }
+
+        public class TableImage
+        {
+            public String TableName { get; set; }
+            public Bitmap TableImg { get; set; }
+            public List<ColumnImage> Columns { get; set; }
+        }
+
+        public class ColumnImage
+        {
+            public String ColumnName { get; set; }
+            public Bitmap ColumnImg { get; set; }
+        }
+
+        public void CreateTableImages(List<TableImage> tableImages, String path)
+        {
+            int LowestFontSize = GetLowestFontSize(tableImages);
+
+            foreach (TableImage tableImage in tableImages)
+            {
+                tableImage.TableImg = CreateTableNameImage(tableImage.TableName, LowestFontSize);
+
+                foreach (ColumnImage columnImage in tableImage.Columns)
+                {
+                    columnImage.ColumnImg = CreateTableColumnNameImage(columnImage.ColumnName, LowestFontSize);
+
+                    int width = tableImage.TableImg.Width;
+                    int height = tableImage.TableImg.Height + columnImage.ColumnImg.Height;
+
+                    Bitmap newImg = new Bitmap(width, height);
+                    Graphics g = Graphics.FromImage(newImg);
+
+                    //Table Image
+                    g.DrawImage(tableImage.TableImg, new PointF(0,0));
+
+                    //Column Image
+                    PointF newLocation = new PointF(0, tableImage.TableImg.Height);
+                    g.DrawImage(columnImage.ColumnImg, newLocation);
+
+                    tableImage.TableImg = newImg;
+                }
+
+                string FileName = tableImage.TableName + ".jpg";
+                string FilePath = Path.Combine(path, "ModelImages", FileName);
+
+                tableImage.TableImg.Save(FilePath);
+            }
+            
+        }
+
+        public int GetLowestFontSize(List<TableImage> tableImages)
+        {
+            int LowestFontSize = 999999;
+
+            foreach (TableImage tableImage in tableImages)
+            {
+                int newTableFontSize = GetFontSizes(tableImage.TableName);
+
+                if (newTableFontSize < LowestFontSize)
+                {
+                    LowestFontSize = newTableFontSize;
+                }
+
+                foreach (ColumnImage columnImage in tableImage.Columns)
+                {
+                    int newColFontSize = GetFontSizes(columnImage.ColumnName);
+
+                    if (newColFontSize < LowestFontSize)
+                    {
+                        LowestFontSize = newColFontSize;
+                    }
+                }
+            }
+
+            return LowestFontSize;
+        }
+
+        public int GetFontSizes(string Text)
+        {
+            int fontSize = 1;
+
+            string path = Path.Combine(AppPath, "Resources", "TableName.jpg");
+            Bitmap img = new Bitmap(path);
+
+            Graphics g = Graphics.FromImage(img);
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            
+            Font font = new Font("Arial", fontSize);
+            Brush brush = Brushes.White;
+
+            //Confine text to image dimensions
+            var stringSize = g.MeasureString(Text, font);
+            while (stringSize.Width < img.Width && stringSize.Height < img.Height)
+            {
+                font = new Font("Arial", fontSize + 1);
+                stringSize = g.MeasureString(Text, font);
+                fontSize = fontSize + 1;
+            }
+            fontSize--;
+
+            return fontSize;
+        }
+
+        public Bitmap CreateTableNameImage(string TableName, int fontSize)
+        {
+            string path = Path.Combine(AppPath, "Resources", "TableName.jpg");
+            Bitmap img = new Bitmap(path);
+
+            Graphics g = Graphics.FromImage(img);
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+
+            Font font = new Font("Arial", fontSize);
+            Brush brush = Brushes.White;
+
+            //Align text center
+            StringFormat strFormat = new StringFormat();
+            strFormat.Alignment = StringAlignment.Center;
+            strFormat.LineAlignment = StringAlignment.Center;
+
+            //Create a rectabgle to bound text to
+            RectangleF rect = new RectangleF(0, 0, img.Width, img.Height);
+
+            g.DrawString(TableName, font, brush, rect, strFormat);
+
+            return img;
+        }
+        public Bitmap CreateTableColumnNameImage(string ColumnName, int fontSize)
+        {
+            string path = Path.Combine(AppPath, "Resources", "Column.jpg");
+            Bitmap img = new Bitmap(path);
+
+            Graphics g = Graphics.FromImage(img);
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+
+            Font font = new Font("Arial", fontSize);
+            Brush brush = Brushes.Black;
+
+            //Align text center
+            StringFormat strFormat = new StringFormat();
+            strFormat.Alignment = StringAlignment.Near;
+            strFormat.LineAlignment = StringAlignment.Center;
+
+            //Create a rectabgle to bound text to
+            RectangleF rect = new RectangleF(0, 0, img.Width, img.Height);
+
+            g.DrawString(ColumnName, font, brush, rect, strFormat);
+
+            return img;
+        }
+
+        
     }
 }

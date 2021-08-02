@@ -12,18 +12,15 @@ namespace GenerateJSModelFromEntitySQL
     using System;
     using System.Collections.Generic;
     
-    public partial class Widget
+    public partial class Users
     {
-        public int WidgetID { get; set; }
-        public string WidgetContent { get; set; }
-        public string Color { get; set; }
-        public Nullable<double> Width { get; set; }
-        public Nullable<double> Height { get; set; }
-        public Nullable<double> Volume { get; set; }
+        public int UserID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
         public Nullable<System.DateTime> CreatedDateTime { get; set; }
         public Nullable<System.DateTime> LastUpdatedDateTime { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
-        public Nullable<int> fk_UserID { get; set; }
     }
 }
