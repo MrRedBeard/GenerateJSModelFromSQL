@@ -5,6 +5,10 @@ I created this to simplify documentation writing and to keep js models in sync w
 
 20210801 Now outputs images of tables. Lots of code cleanup. Upgraded to Visual Studio 2019.
 
+#### Images
+![alt text](ModelImages/Users.jpg)
+![alt text](ModelImages/Widgets.jpg)
+
 #### From
 
 ## SQL Structure
@@ -49,29 +53,49 @@ I created this to simplify documentation writing and to keep js models in sync w
 ```
 /**
 * Do Not Edit
-* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* Generate JS Model From Entity SQL Last Updated: 8/1/2021 10:09:22 PM
 * This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* https://github.com/MrRedBeard/GenerateJSModelFromEntitySQL
 * Do Not Edit
 */
-```
-```javascript
-  class clsWidget
-  {
-    constructor()
-    {
-      this.WidgetID = null;
-      this.WidgetContent = '';
-      this.Color = '';
-      this.Width = null;
-      this.Height = null;
-      this.Volume = null;
-      this.CreatedDateTime = null;
-      this.LastUpdatedDateTime = null;
-      this.CreatedBy = null;
-      this.LastUpdatedBy = null;
-      this.fk_UserID = null;
-    }
-  }
+class clsUsers
+{
+	constructor()
+	{
+		this.UserID = null;
+		this.FirstName = '';
+		this.LastName = '';
+		this.Email = '';
+		this.CreatedDateTime = null;
+		this.LastUpdatedDateTime = null;
+		this.CreatedBy = null;
+		this.LastUpdatedBy = null;
+	}
+}
+class clsWidgets
+{
+	constructor()
+	{
+		this.WidgetID = null;
+		this.WidgetContent = '';
+		this.Color = '';
+		this.Width = null;
+		this.Height = null;
+		this.Volume = null;
+		this.CreatedDateTime = null;
+		this.LastUpdatedDateTime = null;
+		this.CreatedBy = null;
+		this.LastUpdatedBy = null;
+		this.fk_UserID = null;
+	}
+}
+/**
+* Do Not Edit
+* Generate JS Model From Entity SQL Last Updated: 8/1/2021 10:09:22 PM
+* This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* https://github.com/MrRedBeard/GenerateJSModelFromEntitySQL
+* Do Not Edit
+*/
 ```
 
 #### And
@@ -80,34 +104,44 @@ I created this to simplify documentation writing and to keep js models in sync w
 ```
 /**
 * Do Not Edit
-* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* Generate JS Model From Entity SQL Last Updated: 8/1/2021 10:09:22 PM
 * This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* https://github.com/MrRedBeard/GenerateJSModelFromEntitySQL
 * Do Not Edit
 */
+
+--Start of Tables--
+
+Users
+Widgets
+
+--End of Tables--
+
 TableName|ColumnName|DataType|ColumnDescription
-User|UserID|int|
-User|FirstName|string|
-User|LastName|string|
-User|Email|string|
-User|CreatedDateTime|datetime|
-User|LastUpdatedDateTime|datetime|
-User|CreatedBy|int|
-User|LastUpdatedBy|int|
-Widget|WidgetID|int|
-Widget|WidgetContent|string|
-Widget|Color|string|
-Widget|Width|double|
-Widget|Height|double|
-Widget|Volume|double|
-Widget|CreatedDateTime|datetime|
-Widget|LastUpdatedDateTime|datetime|
-Widget|CreatedBy|int|
-Widget|LastUpdatedBy|int|
-Widget|fk_UserID|int|
+Users|UserID|int|
+Users|FirstName|string|
+Users|LastName|string|
+Users|Email|string|
+Users|CreatedDateTime|datetime|
+Users|LastUpdatedDateTime|datetime|
+Users|CreatedBy|int|
+Users|LastUpdatedBy|int|
+Widgets|WidgetID|int|
+Widgets|WidgetContent|string|
+Widgets|Color|string|
+Widgets|Width|double|
+Widgets|Height|double|
+Widgets|Volume|double|
+Widgets|CreatedDateTime|datetime|
+Widgets|LastUpdatedDateTime|datetime|
+Widgets|CreatedBy|int|
+Widgets|LastUpdatedBy|int|
+Widgets|fk_UserID|int|
 /**
 * Do Not Edit
-* Generate JS Model From Entity SQL Last Updated: 5/25/2020 11:42:28 AM
+* Generate JS Model From Entity SQL Last Updated: 8/1/2021 10:09:22 PM
 * This file was generated programmatically using GenerateJSModelFromEntitySQL via the Entity Model & Rule Sets
+* https://github.com/MrRedBeard/GenerateJSModelFromEntitySQL
 * Do Not Edit
 */
 ```
