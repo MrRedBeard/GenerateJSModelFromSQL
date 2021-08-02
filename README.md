@@ -1,13 +1,12 @@
-# Generate JS Model Classes From Entity SQL
+# Generate JS DB Model Classes, Images and DB Documentation From Entity SQL
 A simple console app that generates ES6 JavaScript Classes & Model Documentation from Database Entity Model & SQL Database Structure.
 
 I created this to simplify documentation writing and to keep js models in sync with the DB Model with less human error/laziness. 
 
 20210801 Now outputs images of tables. Lots of code cleanup. Upgraded to Visual Studio 2019.
 
-#### Images
-![Users Table](ModelImages/Users.jpg | width=300)
-![Widgets Table](ModelImages/Widgets.jpg | width=300)
+#### Dynamic Images Generated
+<img src="ModelImages/Widgets.jpg" width="250"> <img src="ModelImages/Users.jpg" width="250"> 
 
 #### From
 
