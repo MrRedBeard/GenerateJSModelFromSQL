@@ -6,8 +6,8 @@ I created this to simplify documentation writing and to keep js models in sync w
 20210801 Now outputs images of tables. Lots of code cleanup. Upgraded to Visual Studio 2019.
 
 #### Images
-![alt text](ModelImages/Users.jpg)
-![alt text](ModelImages/Widgets.jpg)
+![Users Table](ModelImages/Users.jpg | width=300)
+![Widgets Table](ModelImages/Widgets.jpg | width=300)
 
 #### From
 
