@@ -3,12 +3,18 @@ A simple console app that generates ES6 JavaScript Classes & Model Documentation
 
 I created this to simplify documentation writing and to keep js models in sync with the DB Model with less human error/laziness. 
 
-20210808 Removed Entity, created interface, saved settings, project folders. Still a work in progress.
+20210808 Removed Entity, created interface, saved settings, project folders. Still a work in progress. Renamed project.
+
 20210801 Now outputs images of tables. Lots of code cleanup. Upgraded to Visual Studio 2019.
+
+## Instructions
+Run the solution to generate `DataModelInfo.txt`, `clsDataStructure.js` & Model Images. These will be output in the same folder as the exe. 
+
+## Interface
 
 <img src="Interface.png" width="500">
 
-#### Dynamic Images Generated
+### Dynamic Images Generated
 <img src="ModelImages/Widgets.jpg" width="250"> <img src="ModelImages/Users.jpg" width="250"> 
 
 #### From
@@ -147,15 +153,3 @@ Widgets|fk_UserID|int|
 * Do Not Edit
 */
 ```
-
-## Instructions
-I included a sample database `SampleDB.sql`
-
-Once Database is created create user `user` with password `user`
-
-The app is preconfigured with a username of user and password user and connection path of localhost\SQLEXPRESS
-
-The model name is set to `GenerateJSModelFromEntitySQL` this will need to be changed to match your model name if you choose to use this solution.
-
-Run the solution to generate `DataModelInfo.txt` & `clsDataStructure.js`. These will be output in the same folder as the solution file. 
-
