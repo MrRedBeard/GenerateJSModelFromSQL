@@ -6,7 +6,7 @@ I created this to simplify documentation writing and to keep js models in sync w
 20210808 Removed Entity, created interface, saved settings, project folders. Still a work in progress.
 20210801 Now outputs images of tables. Lots of code cleanup. Upgraded to Visual Studio 2019.
 
-<img src="Interface.png" width="250">
+<img src="Interface.png" width="500">
 
 #### Dynamic Images Generated
 <img src="ModelImages/Widgets.jpg" width="250"> <img src="ModelImages/Users.jpg" width="250"> 
