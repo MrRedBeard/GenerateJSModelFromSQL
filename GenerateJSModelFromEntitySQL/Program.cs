@@ -11,6 +11,7 @@ using System.Reflection;
 using GenerateJSModelFromSQL;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace GenerateJSModelFromSQL
 {
@@ -24,11 +25,19 @@ namespace GenerateJSModelFromSQL
 
         static void StartForm()
         {
-            MainForm mainForm = new MainForm();
+            Thread t = new Thread((ThreadStart)(() =>
+            {
+                MainForm mainForm = new MainForm();
 
-            mainForm.settings = new clsSettings();
+                mainForm.settings = new clsSettings();
 
-            System.Windows.Forms.Application.Run(mainForm);
+                System.Windows.Forms.Application.Run(mainForm);
+            }));
+
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            t.Join();
+                
         }
     }
 }

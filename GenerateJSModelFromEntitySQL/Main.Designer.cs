@@ -55,6 +55,7 @@ namespace GenerateJSModelFromSQL
             this.btnSaveServer = new System.Windows.Forms.Button();
             this.labelWarning = new System.Windows.Forms.Label();
             this.timerCallOut = new System.Windows.Forms.Timer(this.components);
+            this.panelModel = new System.Windows.Forms.Panel();
             this.panelServerConnection.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -308,11 +309,23 @@ namespace GenerateJSModelFromSQL
             this.timerCallOut.Interval = 3000;
             this.timerCallOut.Tick += new System.EventHandler(this.timerCallOut_Tick);
             // 
+            // panelModel
+            // 
+            this.panelModel.AllowDrop = true;
+            this.panelModel.AutoScroll = true;
+            this.panelModel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelModel.Location = new System.Drawing.Point(541, 32);
+            this.panelModel.Name = "panelModel";
+            this.panelModel.Size = new System.Drawing.Size(630, 465);
+            this.panelModel.TabIndex = 10;
+            // 
             // MainForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 522);
+            this.ClientSize = new System.Drawing.Size(1183, 522);
+            this.Controls.Add(this.panelModel);
             this.Controls.Add(this.labelWarning);
             this.Controls.Add(this.panelServerConnection);
             this.Name = "MainForm";
@@ -354,5 +367,6 @@ namespace GenerateJSModelFromSQL
         private System.Windows.Forms.TextBox textBoxFolderLocation;
         private System.Windows.Forms.Label labelFolder;
         private System.Windows.Forms.Button buttonSelectFolder;
+        private System.Windows.Forms.Panel panelModel;
     }
 }

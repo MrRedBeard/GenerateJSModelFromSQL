@@ -64,14 +64,16 @@ namespace GenerateJSModelFromSQL
             return valid;
         }
 
-        public void BuildModels(clsSettings settingsX, clsConnections connectionX)
+        public List<Image> BuildModels(clsSettings settingsX, clsConnections connectionX)
         {
             settings = settingsX;
             connection = connectionX;
 
             Defaults();
             getDBStructure();
-            BuildFiles();
+            List<Image> images = BuildFiles();
+
+            return images;
         }
 
         private void Defaults()
@@ -89,7 +91,7 @@ namespace GenerateJSModelFromSQL
         {
             DataTable dt = new DataTable();
 
-            string strQuery = @"USE WriteTrack SELECT i.TABLE_NAME TableName
+            string strQuery = @"SELECT i.TABLE_NAME TableName
                 FROM INFORMATION_SCHEMA.TABLES i
                 WHERE i.TABLE_TYPE = 'BASE TABLE'";
 
@@ -148,7 +150,7 @@ namespace GenerateJSModelFromSQL
             }
         }
 
-        public void BuildFiles()
+        public List<Image> BuildFiles()
         {
             string DataModelGenPath = AppDomain.CurrentDomain.BaseDirectory.ToString();
             string DataModelGenSolutionPath = DataModelGenPath.Split(new string[] { "GenerateJSModelFromEntitySQL" }, StringSplitOptions.None)[0];
@@ -265,12 +267,16 @@ namespace GenerateJSModelFromSQL
             System.IO.File.WriteAllText(Path.Combine(connection.ProjectPath, "clsDataModel" + ".js"), jsDataStructure);
 
             //Image Building Data
-            CreateTableImages(tableImages, DataModelGenSolutionPath);
+            List<Image> images = CreateTableImages(tableImages, DataModelGenSolutionPath);
+
+            return images;
         }
 
-        private void CreateTableImages(List<TableImage> tableImages, String path)
+        private List<Image> CreateTableImages(List<TableImage> tableImages, String path)
         {
             int LowestFontSize = GetLowestFontSize(tableImages);
+
+            List<Image> images = new List<Image>();
 
             foreach (TableImage tableImage in tableImages)
             {
@@ -301,9 +307,12 @@ namespace GenerateJSModelFromSQL
 
                 ImageFormat imgFrmt = ImageFormat.Jpeg;
 
+                images.Add(tableImage.TableImg);
+
                 tableImage.TableImg.Save(FilePath, imgFrmt);
             }
 
+            return images;
         }
 
         private int GetLowestFontSize(List<TableImage> tableImages)

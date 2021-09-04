@@ -8,6 +8,8 @@ using System.Windows.Forms;
 
 namespace GenerateJSModelFromSQL
 {
+    //ToDo:// Add support for SQLite https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/?tabs=netcore-cli
+    //ToDo:// Add support for MySQL https://www.nuget.org/packages/MySql.Data/8.0.26/ https://zetcode.com/csharp/mysql/ https://stackoverflow.com/questions/21618015/how-to-connect-to-mysql-database https://stackoverflow.com/questions/4471482/connecting-to-a-mysql-db-with-c-sharp-need-some-with-datasets
     public partial class MainForm : Form
     {
         public clsSettings settings { get; set; }
@@ -47,9 +49,72 @@ namespace GenerateJSModelFromSQL
                 textBoxFolderLocation.Text = SelectedConnection.ProjectPath;
 
                 //SelectedConnection
-                modelBuilder.BuildModels(settings, SelectedConnection);
+                List<Image> images = modelBuilder.BuildModels(settings, SelectedConnection);
+
+                GenerateModelUI(images);
             }
         }
+
+        public void GenerateModelUI(List<Image> images)
+        {
+            panelModel.Controls.Clear();
+
+            Point location = new System.Drawing.Point(10, 10);
+
+            foreach (Image image in images)
+            {
+                Panel pb = new Panel();
+                pb.AllowDrop = false;
+                pb.BackgroundImage = image;
+                pb.BackgroundImageLayout = ImageLayout.Zoom;
+
+                int newWidth = 50;
+                int originalHeight = image.Height;
+                int originalWidth = image.Width;
+                float per = (float) newWidth / originalWidth;
+                int newHeight = (int) Math.Round(originalHeight * per, 0);
+                pb.Width = newWidth;
+                pb.Height = newHeight;
+
+                pb.Location = location;
+
+                pb.MouseDown += new MouseEventHandler(ImgMouseDown);
+
+                panelModel.Controls.Add(pb);
+
+                location.X = location.X + 110;
+            }
+        }
+
+        private Point start;
+
+        public void ImgMouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                start = e.Location;
+                Panel pb = (Panel)sender;
+                pb.MouseUp += new MouseEventHandler(ImgMouseUp);
+                pb.MouseMove += new MouseEventHandler(ImgMouseMove);
+            }
+        }
+
+        public void ImgMouseUp(object sender, MouseEventArgs e)
+        {
+            Panel pb = (Panel)sender;
+            pb.MouseUp -= new MouseEventHandler(ImgMouseUp);
+            pb.MouseMove -= new MouseEventHandler(ImgMouseMove);
+        }
+
+        public void ImgMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Panel pb = (Panel)sender;
+                pb.Location = new Point(pb.Location.X - (start.X - e.X), pb.Location.Y - (start.Y - e.Y));
+            }
+        }
+
 
         public void ClearFields()
         {
@@ -419,6 +484,8 @@ namespace GenerateJSModelFromSQL
         private void ResizeForm()
         {
             labelWarning.Width = MainForm.ActiveForm.Width;
+            panelModel.Height = MainForm.ActiveForm.Height - panelModel.Location.Y - 50;
+            panelModel.Width = MainForm.ActiveForm.Width - panelModel.Location.X - 20;
         }
 
         public void CallOuts(string Type, string Message)

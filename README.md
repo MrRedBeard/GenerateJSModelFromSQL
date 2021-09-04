@@ -3,6 +3,8 @@ A simple console app that generates ES6 JavaScript Classes & Model Documentation
 
 I created this to simplify documentation writing and to keep js models in sync with the DB Model with less human error/laziness. 
 
+20210904 Displays generated images on UI with Drag & Drop. Corrected Query
+
 20210808 Removed Entity, created interface, saved settings, project folders. Still a work in progress. Renamed project.
 
 20210801 Now outputs images of tables. Lots of code cleanup. Upgraded to Visual Studio 2019.
